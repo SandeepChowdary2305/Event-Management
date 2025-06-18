@@ -8,5 +8,4 @@ if (!isset($_SESSION['username']) || $_SESSION['username'] !== 'admin') {
 <?php include 'header.php'; ?>
 <h1>Admin Dashboard</h1>
 <p>Welcome, Admin!</p>
-</body>
-</html>
+<?php include 'footer.php'; ?>
