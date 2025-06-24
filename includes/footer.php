@@ -7,6 +7,7 @@
             <a href="#" class="text-white mx-2">Contact Us</a>
         </div>
     </div>
+    &copy; <?php echo date("Y"); ?> Event Management System. All rights reserved.
 </footer>
 </body>
 </html>
