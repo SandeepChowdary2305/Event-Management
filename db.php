@@ -1,12 +1,11 @@
 <?php
-$host = 'localhost';
-$user = 'root';
-$pass = ''; // default XAMPP password is empty
-$db   = 'ems_db';
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "ems_db";
 
-$conn = new mysqli($host, $user, $pass, $db);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
 }
 ?>
