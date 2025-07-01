@@ -18,16 +18,17 @@
   background-color: #006EA8;
   color: white;
   padding: 20px;
-  box-shadow: 2px 0 8px rgba(0,0,0,0.15);
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.1);
 }
 
 .sidebar img {
   height: 150px;
-    width: 200px;
+  width: 200px;
+  margin-bottom: 20px;
 }
 
 .sidebar nav {
@@ -40,18 +41,15 @@
   color: white;
   text-decoration: none;
   font-size: 16px;
+  padding: 10px;
+  border-radius: 8px;
   transition: 0.3s;
 }
 
 .sidebar nav a:hover {
-  color: #FFC107;
-  background-color: white;
-  height: 50px;
-  text-align: center;
-  padding-top: 15px;
-  font-size: 20px;
-  font-weight: 900;
-  border-radius: 20px;
+  background-color: #ffffff;
+  color: #006EA8;
+  font-weight: bold;
 }
 
 /* Main area */

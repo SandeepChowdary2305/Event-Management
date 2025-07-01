@@ -45,7 +45,7 @@ if ($chart_query) {
             <img src="../media/logo.png" alt="Celebria Logo" />
             <nav>
                 <a href="admin.php">Dashboard</a>
-                <a href="manage-users.php">Users</a>
+                <a href="users.php">Users</a>
                 <a href="manage-events.php">Events</a>
                 <a href="manage-venues.php">Venues</a>
                 <a href="manage-bookings.php">Bookings</a>

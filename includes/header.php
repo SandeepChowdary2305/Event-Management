@@ -1,5 +1,5 @@
 <header>
-    <div>
+    <div class="hd-container">
       <div>
         <img class="logo" src="media/logo.png" alt="Logo"/>
       </div>
@@ -9,10 +9,18 @@
       </div>
     </div>
     <nav>
-    <a href="#">Home</a>
-    <a href="login.php">Login</a>
-    <a href="register.php">Register</a>
-    <a href="#">View Events</a>
-    <a href="#">Contact Us</a>
-  </nav>
+  <div class="nav-center">
+    <ul>
+      <li><a href="index.php">Home</a></li>
+      <li><a href="#">View Events</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
+  <div class="nav-right">
+    <ul>
+      <li><a href="login.php">Login</a></li>
+      <li><a href="register.php">Register</a></li>
+    </ul>
+  </div>
+</nav>
   </header>

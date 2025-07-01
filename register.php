@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'db.php'; // Make sure this file connects to ems_db
+require_once 'db.php';
 
 $message = '';
 
@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirm  = $_POST['confirm'];
 
-    // Basic validation
     if (empty($name) || empty($email) || empty($password)) {
         $message = "All fields are required.";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -18,7 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif ($password !== $confirm) {
         $message = "Passwords do not match.";
     } else {
-        // Check if email already exists
         $stmt = $conn->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->bind_param("s", $email);
         $stmt->execute();
@@ -27,9 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->num_rows > 0) {
             $message = "Email already registered.";
         } else {
-            // Hash password and insert
             $hashed = password_hash($password, PASSWORD_DEFAULT);
-            $role = 'user'; // default role
+            $role = 'user';
             $insert = $conn->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
             $insert->bind_param("ssss", $name, $email, $hashed, $role);
             if ($insert->execute()) {
@@ -46,38 +43,43 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Register | Event Management System</title>
-    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/register.css">
 </head>
 <body>
+
     <header>
-        <h1>Register</h1>
+        <img src="media/logo.png" alt="Logo">
+        
     </header>
 
-    <div class="container" style="max-width: 500px; margin: 40px auto;">
+    <div class="container">
         <?php if ($message): ?>
-            <p style="color:red;"><?= $message ?></p>
+            <p class="error"><?= $message ?></p>
         <?php endif; ?>
 
         <form method="POST" action="">
-            <label>Full Name:</label><br>
-            <input type="text" name="name" required><br><br>
+            <h1>Register</h1>
+            <label for="name">Full Name:</label>
+            <input type="text" name="name" id="name" required>
 
-            <label>Email:</label><br>
-            <input type="email" name="email" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" required>
 
-            <label>Password:</label><br>
-            <input type="password" name="password" required><br><br>
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" required>
 
-            <label>Confirm Password:</label><br>
-            <input type="password" name="confirm" required><br><br>
+            <label for="confirm">Confirm Password:</label>
+            <input type="password" name="confirm" id="confirm" required>
 
             <button type="submit" class="btn">Register</button>
         </form>
 
-        <p style="margin-top: 20px;">Already have an account? <a href="login.php">Login here</a></p>
+        <p>Already have an account? <a href="login.php">Login here</a></p>
     </div>
+
 </body>
 </html>
