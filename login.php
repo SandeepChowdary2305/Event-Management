@@ -33,7 +33,7 @@
       color: #333;
     }
 
-    input[type="text"],
+    input[type="email"],
     input[type="password"] {
       width: 90%;
       padding: 10px 12px;
@@ -76,10 +76,10 @@
   <div class="login-container">
     <h2>Login</h2>
     <form action="auth.php" method="post">
-      Username: <input type="text" name="username" required><br>
-      Password: <input type="password" name="password" required><br>
-      <input type="submit" value="Login">
-    </form>
+    Email: <input type="email" name="email" required><br>
+    Password: <input type="password" name="password" required><br>
+    <input type="submit" value="Login">
+</form>
     <p>Don't have an account? <a href="register.php">Register here</a></p>
   </div>
 </body>
