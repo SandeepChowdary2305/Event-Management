@@ -1,6 +1,5 @@
-
 <?php
-// You can add session_start() here in future for login system
+// Future use: session_start(); to redirect logged-in users
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,14 +11,19 @@
 </head>
 <body>
   <?php include 'includes/header.php'; ?>
+
+  <!-- Hero Section -->
   <div class="hero">
     <div>
       <h2>Welcome to Our Event Platform</h2>
-      <p>From corporate meetups to college fests, we bring your events to life with powerful planning tools and smooth execution.</p>
+      <p>
+        From corporate meetups to college fests, we bring your events to life with powerful planning tools and smooth execution.
+      </p>
       <a href="login.php" class="btn">Get Started</a>
     </div>
   </div>
 
+  <!-- Features Section -->
   <section class="features">
     <div class="feature-box">
       <h3>Event Planning</h3>
@@ -35,9 +39,9 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     &copy; <?php echo date("Y"); ?> Event Management System. All rights reserved.
   </footer>
-
-
-
+</body>
+</html>
