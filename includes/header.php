@@ -19,7 +19,7 @@ if (session_status() === PHP_SESSION_NONE) {
       <ul>
         <?php if (isset($_SESSION['username'])): ?>
           <li><a href="index.php">Home</a></li>
-          <li><a href="#">View Events</a></li>
+          <li><a href="events.php">View Events</a></li>
           <li><a href="#">Contact Us</a></li>
         <?php endif; ?>
       </ul>
