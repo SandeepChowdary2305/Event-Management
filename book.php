@@ -1,4 +1,6 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 session_start();
 include("db.php");
 
@@ -15,11 +17,35 @@ if (!isset($_GET['event_id'])) {
 
 $event_id = intval($_GET['event_id']); // sanitize input
 
+// Fetch event name using event_id
+$stmtEvent = $conn->prepare("SELECT name FROM event_types WHERE id = ?");
+$stmtEvent->bind_param("i", $event_id);
+$stmtEvent->execute();
+$stmtEvent->bind_result($event_name);
+$stmtEvent->fetch();
+$stmtEvent->close();
+
+if (!$event_name) {
+    die("Event not found.");
+}
+
+// Fetch venues for dropdown
+$venueOptions = "";
+$venueQuery = $conn->query("SELECT id, name FROM venues");
+
+if (!$venueQuery) {
+    die("Venue Query Failed: " . $conn->error);
+}
+
+while ($venue = $venueQuery->fetch_assoc()) {
+    $venueOptions .= "<option value='{$venue['id']}'>" . htmlspecialchars($venue['name']) . "</option>";
+}
+
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_email = $_SESSION['email'];
 
-    // Fetch user_id using email
+    // Fetch user_id
     $stmtUser = $conn->prepare("SELECT id FROM users WHERE email = ?");
     $stmtUser->bind_param("s", $user_email);
     $stmtUser->execute();
@@ -41,6 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     if ($stmt->execute()) {
         echo "<script>alert('Event booked successfully!'); window.location.href='user.php';</script>";
+        exit();
     } else {
         echo "<script>alert('Booking failed. Try again.');</script>";
     }
@@ -52,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html>
 <head>
     <title>Book Event</title>
-    <link rel="stylesheet" href="style/style.css"> <!-- Your existing stylesheet -->
+    <link rel="stylesheet" href="style/style.css">
     <style>
         .book-form-container {
             max-width: 600px;
@@ -61,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            animation: slideIn 0.8s ease-out;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         .book-form-container h2 {
@@ -76,18 +103,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             gap: 15px;
         }
 
+        .book-form-container label {
+            font-weight: 600;
+            color: #003a63;
+        }
+
         .book-form-container input[type="text"],
         .book-form-container input[type="date"],
-        .book-form-container input[type="number"],
+        .book-form-container select,
         .book-form-container textarea {
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 6px;
             font-size: 16px;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        .book-form-container textarea {
-            resize: vertical;
+        .book-form-container input[readonly] {
+            background-color: #e9ecef;
+            cursor: not-allowed;
         }
 
         .book-form-container input[type="submit"] {
@@ -98,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             border-radius: 6px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            font-weight: 700;
         }
 
         .book-form-container input[type="submit"]:hover {
@@ -114,13 +148,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Book Your Event</h2>
     <form method="POST" action="">
         <label>Event Type</label>
-        <input type="text" name="event_type" required>
+        <input type="text" name="event_type" value="<?= htmlspecialchars($event_name) ?>" readonly required>
 
         <label>Event Date</label>
         <input type="date" name="event_date" required>
 
-        <label>Venue ID</label>
-        <input type="number" name="venue_id" required>
+        <label>Select Venue</label>
+        <select name="venue_id" required>
+            <option value="">-- Choose Venue --</option>
+            <?= $venueOptions ?>
+        </select>
 
         <label>Services Required</label>
         <textarea name="services" rows="4" required></textarea>

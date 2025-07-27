@@ -19,7 +19,10 @@
       <p>
         From corporate meetups to college fests, we bring your events to life with powerful planning tools and smooth execution.
       </p>
-      <a href="login.php" class="btn">Get Started</a>
+      <?php if (!isset($_SESSION['username'])): ?>
+  <a href="login.php" class="btn">Get Started</a>
+<?php endif; ?>
+
     </div>
   </div>
 
