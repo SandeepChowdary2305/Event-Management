@@ -15,7 +15,7 @@ if (!isset($_SESSION['username'])) {
   <link rel="stylesheet" href="style/style.css"> 
   <style>
     .ev-container {
-      max-width: 1000px;
+      width: 100%;
       margin: 0 auto;
       padding: 20px;
     }
@@ -48,8 +48,8 @@ if (!isset($_SESSION['username'])) {
     }
 
     .event-image {
-      max-width: 100%;
-      height: 180px;
+      width: 100%;
+      height: 200px;
       object-fit: cover;
       border-radius: 8px;
       margin-bottom: 15px;

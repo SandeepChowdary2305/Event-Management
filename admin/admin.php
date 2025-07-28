@@ -49,6 +49,7 @@ if ($chart_query) {
                 <a href="manage-events.php">Events</a>
                 <a href="manage-venues.php">Venues</a>
                 <a href="manage-bookings.php">Bookings</a>
+                <a href="contact_message.php">Contact</a>
                 <a href="../logout.php">Logout</a>
             </nav>
         </aside>

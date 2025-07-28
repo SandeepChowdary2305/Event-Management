@@ -136,6 +136,7 @@ if (!$venues) {
       <a href="manage-events.php">Events</a>
       <a href="manage-venues.php" style="background:#fff; color:#006EA8; font-weight:bold;">Venues</a>
       <a href="manage-bookings.php">Bookings</a>
+      <a href="contact_message.php">Contact</a>
       <a href="../logout.php">Logout</a>
     </nav>
   </aside>

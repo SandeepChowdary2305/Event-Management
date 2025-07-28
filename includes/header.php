@@ -21,7 +21,7 @@ if (session_status() === PHP_SESSION_NONE) {
           <li><a href="index.php">Home</a></li>
           <li><a href="events.php">View Events</a></li>
           <li><a href="venues.php">Venues</a></li> <!-- Added Venues link -->
-          <li><a href="#">Contact Us</a></li>
+          <li><a href="contact.php">Contact Us</a></li>
         <?php endif; ?>
       </ul>
     </div>

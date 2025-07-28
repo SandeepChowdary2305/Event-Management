@@ -21,7 +21,6 @@ $venues = $conn->query("SELECT * FROM venues ORDER BY name ASC");
             background: linear-gradient(to right, #dfc5c5, #d5f2ff);
             font-family: 'Segoe UI', sans-serif;
             color: #333;
-            margin: 20px;
         }
         h1 {
             text-align: center;
@@ -50,7 +49,7 @@ $venues = $conn->query("SELECT * FROM venues ORDER BY name ASC");
         }
         .venue-image {
             width: 100%;
-            height: 200px;
+            height: 500px;
             object-fit: cover;
             display: block;
         }
@@ -90,8 +89,8 @@ $venues = $conn->query("SELECT * FROM venues ORDER BY name ASC");
     <?php if ($venues && $venues->num_rows > 0): ?>
         <?php while ($venue = $venues->fetch_assoc()): ?>
             <div class="venue-card">
-                <?php if (!empty($venue['image']) && file_exists($venue['image'])): ?>
-                    <img src="<?= htmlspecialchars($venue['image']) ?>" alt="<?= htmlspecialchars($venue['name']) ?>" class="venue-image" />
+                <?php if (!empty($venue['image']) && file_exists("admin/" . $venue['image'])): ?>
+                    <img src="admin/<?= htmlspecialchars($venue['image']) ?>" alt="<?= htmlspecialchars($venue['name']) ?>" class="venue-image" />
                 <?php else: ?>
                     <img src="images/placeholder.png" alt="No Image" class="venue-image" />
                 <?php endif; ?>
